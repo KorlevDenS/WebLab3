@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+<h:head>
+    <h:outputStylesheet library="css" name="index.css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>WebLab3</title>
+</h:head>
+
+<h:body>
+    <div class="header">
+        Королев Денис Владимирович <h:outputText value="&#160;" /><h:outputText value="&#160;" />
+        <h:outputText value="&#160;" />P32141 <h:outputText value="&#160;" />Вариант 141141
+    </div>
+    <br/><br/>
+    <div class="content">
+        <div id="main">
+            <div id="time-container">
+                <p>Текущее время: </p>
+                <span id="clock"/>
+                <span id="dayOfWeek"/>
+            </div>
+            <script src="resources/js/clock.js" type="text/javascript"> </script>
+            <br/>
+        </div>
+
+        <h:link outcome="toMain">
+            Перейти к графику
+        </h:link>
+    </div>
+</h:body>
+
+</html>

@@ -1,0 +1,31 @@
+body {
+    background-image: url("#{resource['css/images/bachground.png']}");
+    background-repeat: no-repeat;
+    margin: 0;
+    padding: 0;
+    width: 1520px;
+    height: 1406px;
+}
+
+div.content {
+    font-family: "Montserrat", sans-serif;
+    width: 1764px;
+    height: 1764px;
+    margin-left: 110px;
+}
+
+#chart_bar {
+    display: inline-block;
+    width: 50%;
+    height: 50%;
+    text-align: center;
+    font-size: x-large;
+}
+
+#forms {
+
+    display: inline-block;
+    width: 47%;
+    height: 50%;
+}
+

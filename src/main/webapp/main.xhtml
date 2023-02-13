@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://java.sun.com/jstl/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <h:outputStylesheet library="css" name="web3Style.css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>web-lab3-chart</title>
+</h:head>
+
+<h:body>
+    <h:outputScript library="js" name="validation.js"/>
+    <br/><br/>
+    <div class="content">
+        <div id = "chart_bar">
+            <svg viewBox="0 0 960 960" id="svg" onclick="svgClick(event, this)">
+                <g id="g5"></g>
+                <g id="g4"></g>
+                <g id="g3"></g>
+                <g id="g2"></g>
+                <g id="g1"></g>
+
+                <g id="dot1"></g>
+                <g id="dot2"></g>
+                <g id="dot3"></g>
+                <g id="dot4"></g>
+                <g id="dot5"></g>
+                <line x1="480" y1="5" x2="480" y2="960" stroke="black" stroke-width="3"/>
+                <line x1="0" y1="480" x2="955" y2="480" stroke="black" stroke-width="3"/>
+
+                <line x1="80" y1="475" x2="80" y2="485" stroke="black" stroke-width="3"/>
+                <text x="70" y="465">-5</text>
+                <line x1="160" y1="475" x2="160" y2="485" stroke="black" stroke-width="3"/>
+                <text x="150" y="465">-4</text>
+                <line x1="240" y1="475" x2="240" y2="485" stroke="black" stroke-width="3"/>
+                <text x="230" y="465">-3</text>
+                <line x1="320" y1="475" x2="320" y2="485" stroke="black" stroke-width="3"/>
+                <text x="310" y="465">-2</text>
+                <line x1="400" y1="475" x2="400" y2="485" stroke="black" stroke-width="3"/>
+                <text x="390" y="465">-1</text>
+                <line x1="560" y1="475" x2="560" y2="485" stroke="black" stroke-width="3"/>
+                <text x="555" y="465">1</text>
+                <line x1="640" y1="475" x2="640" y2="485" stroke="black" stroke-width="3"/>
+                <text x="635" y="465">2</text>
+                <line x1="720" y1="475" x2="720" y2="485" stroke="black" stroke-width="3"/>
+                <text x="715" y="465">3</text>
+                <line x1="800" y1="475" x2="800" y2="485" stroke="black" stroke-width="3"/>
+                <text x="795" y="465">4</text>
+                <line x1="880" y1="475" x2="880" y2="485" stroke="black" stroke-width="3"/>
+                <text x="875" y="465">5</text>
+
+                <text x="495" y="20">X</text>
+                <text x="945" y="465">Y</text>
+                <polygon points="480,0 470,20 480,14 490,20"/>
+                <polygon points="960,480 940,470 946,480 940,490 "/>
+
+                <line x1="475" y1="80" x2="485" y2="80" stroke="black" stroke-width="3"/>
+                <text x="490" y="90">5</text>
+                <line x1="475" y1="160" x2="485" y2="160" stroke="black" stroke-width="3"/>
+                <text x="490" y="170">4</text>
+                <line x1="475" y1="240" x2="485" y2="240" stroke="black" stroke-width="3"/>
+                <text x="490" y="250">3</text>
+                <line x1="475" y1="320" x2="485" y2="320" stroke="black" stroke-width="3"/>
+                <text x="490" y="330">2</text>
+                <line x1="475" y1="400" x2="485" y2="400" stroke="black" stroke-width="3"/>
+                <text x="490" y="410">1</text>
+                <line x1="475" y1="560" x2="485" y2="560" stroke="black" stroke-width="3"/>
+                <text x="490" y="565">-1</text>
+                <line x1="475" y1="640" x2="485" y2="640" stroke="black" stroke-width="3"/>
+                <text x="490" y="645">-2</text>
+                <line x1="475" y1="720" x2="485" y2="720" stroke="black" stroke-width="3"/>
+                <text x="490" y="725">-3</text>
+                <line x1="475" y1="800" x2="485" y2="800" stroke="black" stroke-width="3"/>
+                <text x="490" y="805">-4</text>
+                <line x1="475" y1="880" x2="485" y2="880" stroke="black" stroke-width="3"/>
+                <text x="490" y="885">-5</text>
+            </svg>
+        </div>
+        <div id="forms">
+            <h:form method="get" id="form">
+                <div class="data">
+                    <h:inputHidden id="hiddenX" value="#{resBean.newPoint.hiddenX}"/>
+                    <h:inputHidden id="hiddenY" value="#{resBean.newPoint.hiddenY}"/>
+                    X:
+                    <h:inputText id="x" value="#{resBean.newPoint.x}" autocomplete="off" validatorMessage="Координата Y должна быть в диапазоне [-3;3]">
+                        <f:validateRequired/>
+                        <f:validateDoubleRange minimum="-3" maximum="5"/>
+                    </h:inputText>
+                    Y ∈ [-5;5]:
+                    <h:inputText id="y-inputHidden" value="#{resBean.newPoint.y}" autocomplete="off" validatorMessage="Координата Y должна быть в диапазоне [-3;5]">
+                        <f:validateRequired/>
+                        <f:validateDoubleRange minimum="-3" maximum="5"/>
+                    </h:inputText>
+                    <br/>
+                    <h:message for="y-inputHidden" style="color: red"/>
+                    <br/>
+                    R:
+                    <h:selectBooleanCheckbox label="1" id="p1R" class="checkboxR"  onclick="checkboxClick(this)"  value="#{resBean.newPoint.r1}"/>
+                    <label for="p1R">1</label>
+                    <h:selectBooleanCheckbox label="2" id="p2R" class="checkboxR"  onclick="checkboxClick(this)"  value="#{resBean.newPoint.r2}"/>
+                    <label for="p2R">1.5</label>
+                    <h:selectBooleanCheckbox label="3" id="p3R" class="checkboxR"  onclick="checkboxClick(this)"  value="#{resBean.newPoint.r3}"/>
+                    <label for="p3R">2</label>
+                    <h:selectBooleanCheckbox label="4" id="p4R" class="checkboxR"  onclick="checkboxClick(this)"  value="#{resBean.newPoint.r4}"/>
+                    <label for="p4R">2.5</label>
+                    <h:selectBooleanCheckbox label="5" id="p5R" class="checkboxR"  onclick="checkboxClick(this)"  value="#{resBean.newPoint.r5}">
+                    </h:selectBooleanCheckbox>
+                    <label for="p5R">3</label>
+                    <br/>
+                    <h:message for="p5R" style="color: red"/>
+                    <br/>
+                </div>
+                <h:commandButton id="submit" type="submit" value="Отправить" onclick="convert(document.getElementById('form:y-inputHidden'))" action="#{resBean.addPoint()}"/>
+            </h:form>
+        </div>
+
+        <div class="results">
+            <table class="result-table" id="resultTable" style="text-align: center">
+                <tr>
+                    <td>Time</td>
+                    <td>X</td>
+                    <td>Y</td>
+                    <td>R = 1</td>
+                    <td>R = 2</td>
+                    <td>R = 3</td>
+                    <td>R = 4</td>
+                    <td>R = 5</td>
+                    <td>Hit</td>
+                    <td>Execution time</td>
+                </tr>
+                <c:forEach items="${resBean.resultPointsList}" var="shot">
+                    <tr>
+                        <td>${shot.currentTime}</td>
+                        <td>${shot.x}</td>
+                        <td>${shot.y}</td>
+                        <td>${shot.r1}</td>
+                        <td>${shot.r2}</td>
+                        <td>${shot.r3}</td>
+                        <td>${shot.r4}</td>
+                        <td>${shot.r5}</td>
+                        <td>${shot.result}</td>
+                        <td>${shot.executingTime}</td>
+                    </tr>
+                </c:forEach>
+            </table>
+            <h:link outcome="toIndex">
+                Перейти на начальную страницу
+            </h:link>
+        </div>
+    </div>
+</h:body>
+</html>

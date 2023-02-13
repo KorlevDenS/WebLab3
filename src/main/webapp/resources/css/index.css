@@ -1,0 +1,30 @@
+body {
+    background-image: url("#{resource['css/images/bachground.png']}");
+    background-repeat: no-repeat;
+}
+
+div.header{
+    font-family: "Montserrat", sans-serif;
+    width: 100%;
+    font-size: xx-large;
+    background-image: url("#{resource['css/images/hat.svg']}");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    color: white;
+    text-align: center;
+    padding: 30px 30px;
+}
+
+div.content {
+    text-align: center;
+    font-family: "Anton", sans-serif;
+    font-size: xx-large;
+}
+
+#time-container {
+    font-size: xxx-large;
+    color: #0022ff;
+    font-weight: bolder;
+    text-shadow: -1px -1px 0 deepskyblue, 1px -1px 0 deepskyblue, -1px 1px 0 deepskyblue, 1px 1px 0 deepskyblue;
+}
