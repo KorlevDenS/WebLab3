@@ -25,6 +25,9 @@ public class Point implements Serializable {
     private double x;
 
     @Transient
+    public static double[] rArray = {0, 1, 1.5, 2, 2.5, 3};
+
+    @Transient
     private double hiddenX;
     private double y;
     @Transient
@@ -154,15 +157,15 @@ public class Point implements Serializable {
     }
 
     private boolean rectangle(double x, double y, double r) {
-        return (x > 0) && (y < 0) && (x <= r / 2) && (y >= r*(-1));
+        return (x < 0) && (y < 0) && (x >= (-1)*r) && (y >= (-1)*r/2);
     }
 
     private boolean circle(double x, double y, double r) {
-        return (x >= 0) && (y >= 0) && (pow(x, 2) + pow(y, 2) <= (pow(r, 2)));
+        return (x >= 0) && (y <= 0) && (pow(x, 2) + pow(y, 2) <= (pow(r, 2)));
     }
 
     private boolean triangle(double x, double y, double r) {
-        return (x < 0) && (y > 0) && (y <= (r * x));
+        return (x > 0) && (y > 0) && (y <= (-1)*(x/2) + r/2);
     }
 
     public void checkHit() {
@@ -170,7 +173,7 @@ public class Point implements Serializable {
         Map<Integer, Boolean> hittingMap = new HashMap<>();
         List<Boolean> rList = Arrays.asList(this.r1, this.r2, this.r3, this.r4, this.r5);
         for (int i = 1; i < 6; i++) {
-            hittingMap.put(i, rList.get(i-1) && rectangle(this.x, this.y, i));
+            hittingMap.put(i, rList.get(i-1) && rectangle(this.x, this.y, rArray[i]));
         }
 
         if (hittingMap.get(1) || hittingMap.get(2) || hittingMap.get(3) || hittingMap.get(4) || hittingMap.get(5)) {
@@ -179,7 +182,7 @@ public class Point implements Serializable {
             return;
         } else {
             for (int i = 1; i < 6; i++) {
-                hittingMap.put(i, rList.get(i-1) && circle(x, y, i));
+                hittingMap.put(i, rList.get(i-1) && circle(x, y, rArray[i]));
             }
         }
 
@@ -189,7 +192,7 @@ public class Point implements Serializable {
             return;
         } else {
             for (int i = 1; i < 6; i++) {
-                hittingMap.put(i, rList.get(i-1) && triangle(x, y, i));
+                hittingMap.put(i, rList.get(i-1) && triangle(x, y, rArray[i]));
             }
         }
 
@@ -217,5 +220,22 @@ public class Point implements Serializable {
         if (this.y == 0d && this.hiddenY != 0d) {
             this.y = this.hiddenY;
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Point{" +
+                "id=" + id +
+                ", x=" + x +
+                ", y=" + y +
+                ", r1=" + r1 +
+                ", r2=" + r2 +
+                ", r3=" + r3 +
+                ", r4=" + r4 +
+                ", r5=" + r5 +
+                ", result='" + result + '\'' +
+                ", executingTime=" + executingTime +
+                ", currentTime=" + currentTime +
+                '}';
     }
 }

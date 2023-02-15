@@ -1,18 +1,18 @@
 package com.example.web3;
 
 import jakarta.annotation.PostConstruct;
-import jakarta.faces.bean.ManagedBean;
-import jakarta.faces.bean.SessionScoped;
+import jakarta.enterprise.context.SessionScoped;
+import jakarta.inject.Named;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-@ManagedBean (name = "resBean")
+@Named ("resBean")
 @SessionScoped
 public class ResultsManagedBean implements Serializable {
-    private List<Point> resultPointsList;
+    private List<ReadyPoint> resultPointsList;
     private Point newPoint = new Point();
 
 
@@ -20,15 +20,28 @@ public class ResultsManagedBean implements Serializable {
         this.resultPointsList = new ArrayList<>();
     }
 
-    public ResultsManagedBean(ArrayList<Point> points) {
+    public ResultsManagedBean(ArrayList<ReadyPoint> points) {
         this.resultPointsList = points;
     }
 
-    public List<Point> loadPointsFromDB() {
+    public List<ReadyPoint> loadPointsFromDB() {
         List<Point> points;
+        List<ReadyPoint> readyPoints = new ArrayList<>();
+
         PointService pointService = new PointService();
         points = pointService.getAllPoints();
-        return points;
+
+
+        for (Point point : points) {
+            if (point.getR1()) readyPoints.add(new ReadyPoint(point, Point.rArray[1]));
+            if (point.getR2()) readyPoints.add(new ReadyPoint(point, Point.rArray[2]));
+            if (point.getR3()) readyPoints.add(new ReadyPoint(point, Point.rArray[3]));
+            if (point.getR4()) readyPoints.add(new ReadyPoint(point, Point.rArray[4]));
+            if (point.getR5()) readyPoints.add(new ReadyPoint(point, Point.rArray[5]));
+        }
+
+
+        return readyPoints;
     }
 
     @PostConstruct
@@ -44,20 +57,28 @@ public class ResultsManagedBean implements Serializable {
         this.newPoint.setCurrentTime(LocalDateTime.now());
         this.newPoint.setExecutingTime((System.nanoTime() - startTime) / 1000000d);
         try {
-            pointService.savePoint(this.newPoint);
+            if (this.newPoint.getR1() || this.newPoint.getR2() || this.newPoint.getR3()
+            || this.newPoint.getR4() || this.newPoint.getR5()) pointService.savePoint(this.newPoint);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        this.resultPointsList.add(0, this.newPoint);
+
+        if (this.newPoint.getR1()) resultPointsList.add(0, new ReadyPoint(this.newPoint, Point.rArray[1]));
+        if (this.newPoint.getR2()) resultPointsList.add(0, new ReadyPoint(this.newPoint, Point.rArray[2]));
+        if (this.newPoint.getR3()) resultPointsList.add(0, new ReadyPoint(this.newPoint, Point.rArray[3]));
+        if (this.newPoint.getR4()) resultPointsList.add(0, new ReadyPoint(this.newPoint, Point.rArray[4]));
+        if (this.newPoint.getR5()) resultPointsList.add(0, new ReadyPoint(this.newPoint, Point.rArray[5]));
+
+
         this.newPoint = new Point();
     }
 
 
-    public List<Point> getResultPointsList() {
+    public List<ReadyPoint> getResultPointsList() {
         return resultPointsList;
     }
 
-    public void setResultPointsList(List<Point> resultPointsList) {
+    public void setResultPointsList(List<ReadyPoint> resultPointsList) {
         this.resultPointsList = resultPointsList;
     }
 

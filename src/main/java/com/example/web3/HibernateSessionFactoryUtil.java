@@ -20,7 +20,6 @@ public class HibernateSessionFactoryUtil {
         sessionFactory = configuration.buildSessionFactory(builder.build());
     }
 
-    //throws HibernateException
     public static SessionFactory getSessionFactory() {
         if (sessionFactory == null) {
                 createSessionFactory();

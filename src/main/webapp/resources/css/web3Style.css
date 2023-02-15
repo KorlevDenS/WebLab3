@@ -23,9 +23,86 @@ div.content {
 }
 
 #forms {
-
+    vertical-align: top;
     display: inline-block;
     width: 47%;
     height: 50%;
+}
+
+#forms form {
+    margin-left: 15%;
+    margin-top: 15%;
+}
+
+.data {
+    font-size: larger;
+}
+
+.checkboxR {
+    margin-right: 6px;
+    font-size: larger;
+    height: 40px;
+    width: 50px;
+    background-color: #b88fff;
+    border-radius: 4px;
+    border-width: 1px;
+    margin-bottom: 20px;
+}
+
+#form\:x {
+    width: 266px;
+    margin-bottom: 20px;
+}
+
+#form\:y-inputHidden {
+    background-color: snow;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    border-width: 1px;
+    width: 266px;
+    font-size: large;
+    height: 30px;
+
+}
+
+#form\:goBack {
+    margin-top: 50px;
+    color: #0022ff;
+}
+
+#form\:submit {
+    text-align: center;
+    color: white;
+    margin-top: 5%;
+    margin-left: 45%;
+    background-color: #b88fff;
+    border-width: 1px;
+    border-radius: 6px;
+    height: 40px;
+    width: 100px;
+}
+
+#form\:submit:hover {
+    background-color: #5851DB;
+}
+
+#form\:submit:disabled {
+    background-color: #b88fff;
+}
+
+table {
+    position: absolute;
+    font-family: "Montserrat", sans-serif;
+    font-size: larger;
+    width: 80%;
+    margin-left: 10%;
+    margin-top: 5%;
+
+    text-align: center;
+    border-collapse: collapse;
+    border-top: 10px ridge mediumblue;
+    border-bottom: 10px ridge mediumblue;
+    border-right: 10px ridge mediumblue;
+    border-left: 10px ridge mediumblue;
 }
 

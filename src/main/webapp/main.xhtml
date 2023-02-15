@@ -14,22 +14,21 @@
 </h:head>
 
 <h:body>
-    <h:outputScript library="js" name="validation.js"/>
     <br/><br/>
     <div class="content">
         <div id = "chart_bar">
             <svg viewBox="0 0 960 960" id="svg" onclick="svgClick(event, this)">
-                <g id="g5"></g>
-                <g id="g4"></g>
-                <g id="g3"></g>
-                <g id="g2"></g>
-                <g id="g1"></g>
+                <g id="g5"/>
+                <g id="g4"/>
+                <g id="g3"/>
+                <g id="g2"/>
+                <g id="g1"/>
 
-                <g id="dot1"></g>
-                <g id="dot2"></g>
-                <g id="dot3"></g>
-                <g id="dot4"></g>
-                <g id="dot5"></g>
+                <g id="dot1"/>
+                <g id="dot2"/>
+                <g id="dot3"/>
+                <g id="dot4"/>
+                <g id="dot5"/>>
                 <line x1="480" y1="5" x2="480" y2="960" stroke="black" stroke-width="3"/>
                 <line x1="0" y1="480" x2="955" y2="480" stroke="black" stroke-width="3"/>
 
@@ -82,16 +81,18 @@
             </svg>
         </div>
         <div id="forms">
-            <h:form method="get" id="form">
+            <h:form method="post" id="form">
                 <div class="data">
                     <h:inputHidden id="hiddenX" value="#{resBean.newPoint.hiddenX}"/>
                     <h:inputHidden id="hiddenY" value="#{resBean.newPoint.hiddenY}"/>
-                    X:
-                    <h:inputText id="x" value="#{resBean.newPoint.x}" autocomplete="off" validatorMessage="Координата Y должна быть в диапазоне [-3;3]">
+
+                    X ∈ [-3;3]:
+                    <p:spinner id="x" value="#{resBean.newPoint.x}" min="-3" max="3" stepFactor="1" round="true">
                         <f:validateRequired/>
-                        <f:validateDoubleRange minimum="-3" maximum="5"/>
-                    </h:inputText>
-                    Y ∈ [-5;5]:
+                        <f:validateLongRange minimum="-3" maximum="3"/>
+                    </p:spinner>
+                    <br/>
+                    Y ∈ [-3;5]:
                     <h:inputText id="y-inputHidden" value="#{resBean.newPoint.y}" autocomplete="off" validatorMessage="Координата Y должна быть в диапазоне [-3;5]">
                         <f:validateRequired/>
                         <f:validateDoubleRange minimum="-3" maximum="5"/>
@@ -116,6 +117,10 @@
                     <br/>
                 </div>
                 <h:commandButton id="submit" type="submit" value="Отправить" onclick="convert(document.getElementById('form:y-inputHidden'))" action="#{resBean.addPoint()}"/>
+                <br/>
+                <h:link id="goBack" outcome="toIndex">
+                    Перейти на начальную страницу
+                </h:link>
             </h:form>
         </div>
 
@@ -125,33 +130,26 @@
                     <td>Time</td>
                     <td>X</td>
                     <td>Y</td>
-                    <td>R = 1</td>
-                    <td>R = 2</td>
-                    <td>R = 3</td>
-                    <td>R = 4</td>
-                    <td>R = 5</td>
+                    <td>R</td>
                     <td>Hit</td>
                     <td>Execution time</td>
+                    <td style="display:none;">Checked R</td>
                 </tr>
                 <c:forEach items="${resBean.resultPointsList}" var="shot">
                     <tr>
                         <td>${shot.currentTime}</td>
                         <td>${shot.x}</td>
                         <td>${shot.y}</td>
-                        <td>${shot.r1}</td>
-                        <td>${shot.r2}</td>
-                        <td>${shot.r3}</td>
-                        <td>${shot.r4}</td>
-                        <td>${shot.r5}</td>
+                        <td>${shot.r}</td>
                         <td>${shot.result}</td>
                         <td>${shot.executingTime}</td>
+                        <td style="display:none;">${shot.checkedR}</td>
                     </tr>
                 </c:forEach>
             </table>
-            <h:link outcome="toIndex">
-                Перейти на начальную страницу
-            </h:link>
         </div>
     </div>
+    <h:outputScript library="js" name="validation.js"/>
+    <h:outputScript library="js" name="snow.js"/>
 </h:body>
 </html>

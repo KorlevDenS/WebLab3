@@ -19,11 +19,11 @@ public class TestMain {
         //pointService.savePoint(point);
         //pointService.savePoint(point1);
         //pointService.savePoint(point2);
+        //pointService.clearAllPoints();
+        //System.out.println(pointService.getAllPoints());
         pointService.clearAllPoints();
-        //System.out.println(pointService.findPointById(5));
-        //pointService.deletePoint(pointService.findPointById(7));
 
-        for (Point p : pointService.getAllPoints()) System.out.println(p);
+        //for (Point p : pointService.getAllPoints()) System.out.println(p);
 
             /*
             UserService userService = new UserService();
